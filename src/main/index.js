@@ -30,6 +30,31 @@ if (process.defaultApp) {
   app.setAsDefaultProtocolClient('testapp1')
 }
 
+
+const gotTheLock = app.requestSingleInstanceLock()
+
+if (!gotTheLock) {
+  app.quit()
+} else {
+  app.on('second-instance', (event, commandLine, workingDirectory) => {
+    // Someone tried to run a second instance, we should focus our window.
+    if (winHandler.browserWindow) {
+      if (winHandler.browserWindow.isMinimized()) winHandler.browserWindow.restore()
+      winHandler.browserWindow.focus()
+    }
+  })
+
+  winHandler.onCreated(async _browserWindow => {
+    await winHandler.loadPage('/')
+    // Or load custom url
+    // _browserWindow.loadURL('https://google.com')
+  })
+
+  app.on('open-url', (event, url) => {
+    dialog.showErrorBox('Welcome Back', `You arrived from: ${url}`)
+  })
+}
+
 winHandler.onCreated(_browserWindow => {
   winHandler.loadPage('/')
   // Or load custom url
