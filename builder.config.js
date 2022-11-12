@@ -16,7 +16,7 @@ const linuxOS = {
   linux: {
     icon: ICONS_DIR,
     target: 'deb',
-    mimeTypes: 'x-scheme-handler/testapp1',
+    mimeTypes: ["x-scheme-handler/testapp1"],
     desktop: {
       StartupNotify: "false",
       Encoding: "UTF-8",
