@@ -15,7 +15,13 @@ const windowsOS = {
 const linuxOS = {
   linux: {
     icon: ICONS_DIR,
-    target: 'deb'
+    target: 'deb',
+    mimeTypes: 'x-scheme-handler/testapp1',
+    desktop: {
+      StartupNotify: "false",
+      Encoding: "UTF-8",
+      MimeType: "x-scheme-handler/testapp1"
+    },
   }
 }
 
